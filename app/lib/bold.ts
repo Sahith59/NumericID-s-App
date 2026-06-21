@@ -65,7 +65,11 @@ const DEFAULT_OWNER_FIELDS = [
 ];
 
 const OBJECT_PATH = /^(.*?)\/([^/]+)\/?$/; // ".../{prefix}/{lastSegment}"
-const ID_LIKE = /^[0-9]+$|^[0-9a-fA-F-]{6,}$|^[a-z]+_[0-9a-zA-Z]+$/; // 42, a uuid, or inv_7001
+// An id-looking last path segment: a pure number (42), a uuid/long-hex (>=6 hex/dash chars), or a
+// PREFIXED id with one OR MORE underscore segments (inv_7001, acct_northstar_001,
+// note_priya_investor_followup). Requiring at least one `_segment` is what distinguishes a real id
+// from a route word like `orders` / `login` (which must NOT be treated as an object id).
+const ID_LIKE = /^[0-9]+$|^[0-9a-fA-F-]{6,}$|^[a-zA-Z][a-zA-Z0-9]*(?:_[a-zA-Z0-9]+)+$/;
 
 interface ResolvedConfig {
   ingestUrl: string;
