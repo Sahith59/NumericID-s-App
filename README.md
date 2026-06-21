@@ -2,6 +2,10 @@
 
 Standalone Next.js application for testing BoLD against a focused BOLA pattern.
 
+## Live Deployment
+
+Production: https://bold-app-1-numeric-ids.vercel.app
+
 ## Contract
 
 - Route: `app/api/orders/[id]/route.ts`
