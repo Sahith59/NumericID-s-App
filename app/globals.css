@@ -1,0 +1,273 @@
+:root {
+  --ink: #181612;
+  --paper: #f5f0e7;
+  --panel: #fffaf0;
+  --line: #2c251a;
+  --muted: #6d6254;
+  --accent: #ce3f24;
+  --accent-dark: #812918;
+  --blue: #195d6b;
+  --shadow: 8px 8px 0 #181612;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(90deg, rgba(24, 22, 18, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(24, 22, 18, 0.05) 1px, transparent 1px),
+    var(--paper);
+  background-size: 32px 32px;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.masthead {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.eyebrow,
+.kicker {
+  margin: 0 0 8px;
+  color: var(--accent-dark);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 820px;
+  margin-bottom: 12px;
+  font-size: clamp(48px, 9vw, 112px);
+  line-height: 0.88;
+  letter-spacing: 0;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.lede {
+  max-width: 680px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.contract {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 290px;
+  padding: 16px;
+  border: 2px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  font-family: "Courier New", monospace;
+}
+
+.contract span {
+  padding: 5px 8px;
+  color: white;
+  background: var(--blue);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.panel {
+  border: 2px solid var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.panelHeader {
+  margin-bottom: 22px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.form,
+.signedIn {
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 44px;
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: #fffdf8;
+  color: var(--ink);
+  padding: 10px 12px;
+}
+
+.button,
+.chips button {
+  min-height: 44px;
+  border: 2px solid var(--line);
+  border-radius: 0;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.button {
+  padding: 10px 14px;
+  box-shadow: 4px 4px 0 var(--line);
+}
+
+.button:hover,
+.chips button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--line);
+}
+
+.secondary {
+  background: var(--blue);
+}
+
+.identity {
+  margin-bottom: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.error {
+  margin: 0;
+  color: var(--accent-dark);
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+}
+
+.lookup {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.chips button {
+  padding: 8px 10px;
+  background: #fffdf8;
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--line);
+}
+
+.status {
+  flex: 0 0 auto;
+  border: 2px solid var(--line);
+  background: #fffdf8;
+  padding: 8px 10px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
+
+.response {
+  min-height: 360px;
+  max-height: 560px;
+  overflow: auto;
+  margin: 0;
+  border: 2px solid var(--line);
+  background: #181612;
+  color: #f8edd8;
+  padding: 16px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 820px) {
+  .shell {
+    width: min(100% - 24px, 560px);
+    padding: 24px 0;
+  }
+
+  .masthead,
+  .grid,
+  .lookup {
+    grid-template-columns: 1fr;
+  }
+
+  .contract {
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  h1 {
+    font-size: 56px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}

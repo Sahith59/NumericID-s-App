@@ -1,0 +1,31 @@
+{
+  "name": "bold-app-1-numeric-ids",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone BoLD test application with numeric order IDs and an intentional BOLA read flaw.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
+  },
+  "overrides": {
+    "postcss": "^8.5.10"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}
