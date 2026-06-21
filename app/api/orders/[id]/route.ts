@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { findOrderById } from "../../../lib/data";
-import { requireUserResponse } from "../../../lib/session";
+import { currentUser, requireUserResponse } from "../../../lib/session";
+import { withBold } from "../../../lib/bold";
 
 type RouteContext = {
   params: Promise<{
@@ -8,35 +9,40 @@ type RouteContext = {
   }>;
 };
 
-export async function GET(_request: Request, { params }: RouteContext) {
-  const auth = await requireUserResponse();
-  if (auth.response) return auth.response;
+export const GET = withBold(
+  async (_request: Request, { params }: RouteContext) => {
+    const auth = await requireUserResponse();
+    if (auth.response) return auth.response;
 
-  const { id } = await params;
+    const { id } = await params;
 
-  if (!/^\d+$/.test(id)) {
-    return NextResponse.json({ error: "Order id must be a plain integer" }, { status: 400 });
-  }
+    if (!/^\d+$/.test(id)) {
+      return NextResponse.json({ error: "Order id must be a plain integer" }, { status: 400 });
+    }
 
-  const order = findOrderById(Number(id));
-  if (!order) {
-    return NextResponse.json({ error: "Order not found" }, { status: 404 });
-  }
+    const order = findOrderById(Number(id));
+    if (!order) {
+      return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    }
 
-  // Intentional BOLA for BoLD testing:
-  // this route authenticates the caller but intentionally skips the ownership check.
-  return NextResponse.json({
-    id: order.id,
-    ownerId: order.ownerId,
-    status: order.status,
-    total: order.total,
-    currency: order.currency,
-    placedAt: order.placedAt,
-    shippingName: order.shippingName,
-    shippingCity: order.shippingCity,
-    lastFour: order.lastFour,
-    items: order.items,
-    internalMemo: order.internalMemo,
-    requestedBy: auth.user
-  });
-}
+    // Intentional BOLA for BoLD testing:
+    // this route authenticates the caller but intentionally skips the ownership check.
+    return NextResponse.json({
+      id: order.id,
+      ownerId: order.ownerId,
+      status: order.status,
+      total: order.total,
+      currency: order.currency,
+      placedAt: order.placedAt,
+      shippingName: order.shippingName,
+      shippingCity: order.shippingCity,
+      lastFour: order.lastFour,
+      items: order.items,
+      internalMemo: order.internalMemo,
+      requestedBy: auth.user
+    });
+  },
+  // Tell BoLD who the authenticated caller is, in the same namespace as the owner field, so an
+  // owner reading their own order is never wrongly flagged.
+  { resolveCallerId: async () => (await currentUser())?.id ?? null }
+);
